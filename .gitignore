@@ -1,0 +1,9 @@
+# Puppet temporary files.
+puppet/.*
+puppet/Puppetfile.lock
+
+# Vagrant temporary files.
+.vagrant/
+
+# Mac
+.DS_Store
