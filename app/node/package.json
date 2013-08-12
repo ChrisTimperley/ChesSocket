@@ -5,8 +5,10 @@
 	"dependencies": {
 		"express": "3.3.5",
 		"redis": "0.8.4",
-		"socket.io": "0.9.16"
+		"socket.io": "0.9.16",
+		"socket.io-client": "0.9.16"
 	},
+	"license": "GPLv2",
 	"scripts": {
 		"start": "node server.js"
 	},
