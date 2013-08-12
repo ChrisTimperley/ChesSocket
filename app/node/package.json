@@ -8,7 +8,7 @@
 		"socket.io": "0.9.16",
 		"socket.io-client": "0.9.16"
 	},
-	"license": "GPLv2",
+	"license": "GPLv3",
 	"scripts": {
 		"start": "node server.js"
 	},
