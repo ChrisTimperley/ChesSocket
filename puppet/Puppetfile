@@ -11,3 +11,6 @@ mod "concat",
 
 mod "firewall",
 	:git => "git://github.com/puppetlabs/puppetlabs-firewall"
+
+mod "nodejs",
+	:git => "git://github.com/puppetlabs/puppetlabs-nodejs"
