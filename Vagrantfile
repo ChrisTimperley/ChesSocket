@@ -5,7 +5,7 @@ Vagrant.configure('2') do |config|
   config.vm.box_url = 'http://goo.gl/8kWkm'
 
   # Forward ports.
-  #config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 8124, host: 8124
 
   # Enable Puppet (with plugin sync).
   config.vm.provision :puppet do |puppet|
