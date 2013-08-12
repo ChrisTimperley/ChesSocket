@@ -5,5 +5,8 @@ puppet/Puppetfile.lock
 # Vagrant temporary files.
 .vagrant/
 
+# Ignore Node modules.
+app/node/node_modules/
+
 # Mac
 .DS_Store
