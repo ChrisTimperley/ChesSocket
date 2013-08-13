@@ -1,12 +1,16 @@
 # Puppet temporary files.
 puppet/.*
+puppet/modules/
 puppet/Puppetfile.lock
 
 # Vagrant temporary files.
 .vagrant/
 
 # Ignore Node modules.
-app/node/node_modules/
+express/node_modules/
 
 # Mac
 .DS_Store
+
+# Locked gemfile
+Gemfile.lock
