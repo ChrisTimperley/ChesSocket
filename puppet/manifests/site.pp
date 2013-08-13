@@ -34,6 +34,6 @@ package { 'nodejs':
   require => Exec['add-node-repo']
 }
 exec { 'npm install': 
-  command => 'sh -c "cd /vagrant/app/node; npm install"',
+  command => 'sh -c "cd /vagrant/express; npm install"',
   require => [Package['nodejs'], Class['redis']]
 }

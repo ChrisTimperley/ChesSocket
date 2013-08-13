@@ -1,0 +1,19 @@
+{
+	"subdomain": "chessocket",
+	"name": "ChesSocket",
+	"version": "0.0.1",
+	"dependencies": {
+		"express": "3.3.5",
+		"redis": "0.8.4",
+		"socket.io": "0.9.16",
+		"socket.io-client": "0.9.16",
+		"debug": "0.7.2"
+	},
+	"license": "GPLv3",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"engines": {
+		"node": "0.8.x"
+	}
+}
