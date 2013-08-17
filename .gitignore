@@ -8,9 +8,11 @@ puppet/Puppetfile.lock
 
 # Ignore Node modules.
 express/node_modules/
+app/node/node_modules/
 
 # Mac
 .DS_Store
 
 # Locked gemfile
 Gemfile.lock
+puppet/modules/firewall
