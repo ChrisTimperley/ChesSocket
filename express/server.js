@@ -1,8 +1,8 @@
 // Setup HTTP server.
 var http = require('http');
-var env = process.env.NODE_ENV || 'development'
+var env = process.env.NODE_ENV || 'development';
 var debug = require('debug')('http');
-var config = require('./config/config')[env]
+var config = require('./config/config')[env];
 
 // Setup Express application (using the appropriate config).
 var express = require('express');

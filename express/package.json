@@ -7,7 +7,8 @@
 		"redis": "0.8.4",
 		"socket.io": "0.9.16",
 		"socket.io-client": "0.9.16",
-		"debug": "0.7.2"
+		"debug": "0.7.2",
+		"jade": "0.35.0"
 	},
 	"license": "GPLv3",
 	"scripts": {
