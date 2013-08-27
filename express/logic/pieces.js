@@ -187,8 +187,8 @@ var __calculate_moves = {
 
 var calculate_move_vector = function (board, piece, direction) {
   moves = [];
-  for (var dest = cartesian_form(piece.cell), cartesian_legal(dest), dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
-    if (!cell_occupied_friendly(board, dest, piece.colour))) {
+  for (var dest = cartesian_form(piece.cell); cartesian_legal(dest); dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
+    if (!cell_occupied_friendly(board, dest, piece.colour)) {
       moves.append(dest);
     }
     if (cell_occupied(board, dest, piece.colour)) {
