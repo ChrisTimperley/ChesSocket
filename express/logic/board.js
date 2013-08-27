@@ -49,8 +49,8 @@ function board_move(board, piece, to) {
  */
 
 function board_pieces(board) {
-  board = board.map(function(row){
-
+  return [].concat.apply([], board).filter(function(piece){
+    return piece != null;
   });
 }
 
