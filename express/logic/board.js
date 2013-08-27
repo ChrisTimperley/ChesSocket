@@ -28,6 +28,20 @@
 
 function board_load(pieces) {
 
+  // Initialise an empty board.
+  board = new Array(8);
+  for (var i = 0; i < 8; i++) {
+    board[i] = new Array(8);
+  }
+
+  // Place each piece on the board.
+  for (piece in pieces) {
+    coords = cartesian_form(piece.cell);
+    board[coords[0]][coords[1]] = piece;
+  }
+
+  return board;
+
 }
 
 /**
@@ -38,10 +52,16 @@ function board_load(pieces) {
  * board - The current state of the board.
  * piece - The piece to move.
  * to - The cell to move the piece to (in algebraic form).
+ *
+ * Returns:
+ * The resulting state of the board.
  */
 
 function board_move(board, piece, to) {
-
+  piece.cell = to;
+  to = cartesian_form(to);
+  board[to[0], to[1]] = piece;
+  return board;
 };
 
 /**
