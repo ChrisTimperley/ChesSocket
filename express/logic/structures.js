@@ -6,13 +6,12 @@
  */
 
 var Piece = function (colour, type) {
-
+  this.colour = colour;
+  this.type = type;
 };
 
-var Player = function (colour) {};
+var Player = function (colour) {
+  this.colour = colour;
+};
 
 var Game = function (turn, pieces) {};
-
-var Board = function () {};
-
-var Move = function () {};
