@@ -63,9 +63,37 @@ function board_move(board, piece, to) {
   board[from_coords[0]][from_coords[1]] = null;
   board[to_coords[0]][to_coords[1]] = new Piece(piece.colour, piece.type, to);
 
+  // Pointers to pieces that exist on other boards are still here.
+  // But they shouldn't cause a problem, since any mutations create a new object.
+
   return board;
 
 };
+
+/**
+ * Renders the board to the console (for debugging purposes).
+ */
+
+function board_render(board)
+{
+  string = "";
+  type_map = {
+    'pawn': 'p',
+    'knight': 'H',
+    'bishop': 'B',
+    'rook': 'C',
+    'queen': 'Q',
+    'king': 'K'
+  };
+  for (var y = 7; y >= 0; y--) {
+    column = [];
+    for (var x = 0; x < 8; x++) {
+      column.push(board[x][y] != null ? type_map[board[x][y].type] : ' ');
+    }
+    string += column.join('.') + '\n';
+  }
+  console.log(string);
+}
 
 /**
  * Returns a list of all the pieces on a given board.
