@@ -31,8 +31,8 @@ var cell_add = function (cell, up, right) {
 };
 
 // Calculates the algebraic form of a cartesian co-ordinate.
-var algebraic_form = function (x, y) {
-  return alphabet_char(x) + (y + 1);
+var algebraic_form = function (coords) {
+  return alphabet_char(coords[0]) + (coords[1] + 1);
 };
 
 // Calculates the cartesian form of an algebraic form.
