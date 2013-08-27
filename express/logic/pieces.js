@@ -149,7 +149,7 @@ var __calculate_moves = {
     ].reduce(function(moves, direction){
       return moves.append(calculate_move_vector(board, piece, direction));
     }, []);
-  }
+  },
 
   /**
    * The King can move to any cell adjacent to it so long as that cell isn't occupied
