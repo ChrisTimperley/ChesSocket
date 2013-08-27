@@ -14,7 +14,6 @@ var calculate_moves = {
    */
 
   'knight': function (board, piece) {
-
     cell = cartesian_form(piece.cell);
     return [
       [2,1], [2,-1], [-2,1], [-2,-1],
@@ -61,11 +60,6 @@ var calculate_moves = {
       }
     }
 
-    // CHECK FILTER.
-    return moves.filter(function(){
-      true
-    });
-
   },
 
   /**
@@ -101,7 +95,7 @@ var calculate_moves = {
    * another piece. If that piece belongs to the enemy, then the queen may move there
    * to capture it.
    */
-   
+
   'queen': function (board, piece) {
     return [
       [1, 1], [-1, 1], [-1, -1], [1, -1],
@@ -109,6 +103,23 @@ var calculate_moves = {
     ].reduce(function(moves, direction){
       return moves.append(calculate_move_vector(board, piece, direction));
     }, []);
+  }
+
+  /**
+   * The King can move to any cell adjacent to it so long as that cell isn't occupied
+   * by a friendly piece.
+   */
+
+  'king': function (board, piece) {
+    cell = cartesian_form(piece.cell);
+    return [
+      [0,1], [1,1], [1,0], [1,-1],
+      [0,-1], [-1,-1], [-1, 0], [-1, 1]
+    ].map(function(offset){
+      return [offset[0] + cell[0], offset[1] + cell[1]];
+    }).filter(function(move){
+      return cartesian_legal(move) && !cell_occupied_friendly(board, dest, colour);
+    });
   }
 
 };
