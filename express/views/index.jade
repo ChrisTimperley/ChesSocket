@@ -1,53 +1,53 @@
 mixin row
-	tr
-		td
-		td
-		td
-		td
-		td
-		td
-		td
-		td
+  tr
+    td
+    td
+    td
+    td
+    td
+    td
+    td
+    td
 
 doctype 5
 html(lang="en" dir="ltr")
-	head
-		title=ChesSocket
-		style.
-			table {
-				border-collapse: collapse;
-				margin: 0 auto;
-			}
-			thead, tfoot {
-				text-align: center;
-			}
-			tbody {
-				border: thin solid #ccc;
-			}
-			tr {
-				height: 50px;
-			}
-			td {
-				width: 50px;
-			}
-			tbody tr:nth-child(odd) td:nth-child(odd),
-			tbody tr:nth-child(even) td:nth-child(even) {
-				background: #444;
-			}
-	body
-		table(id="chessboard")
-			thead
-				tr
-					td(colspan="8") Player 1
-			tfoot
-				tr
-					td(colspan="8") Player 2
-			tbody
-				+row()
-				+row()
-				+row()
-				+row()
-				+row()
-				+row()
-				+row()
-				+row()
+  head
+    title=ChesSocket
+    style.
+      table {
+        border-collapse: collapse;
+        margin: 0 auto;
+      }
+      thead, tfoot {
+        text-align: center;
+      }
+      tbody {
+        border: thin solid #ccc;
+      }
+      tr {
+        height: 50px;
+      }
+      td {
+        width: 50px;
+      }
+      tbody tr:nth-child(odd) td:nth-child(odd),
+      tbody tr:nth-child(even) td:nth-child(even) {
+        background: #444;
+      }
+  body
+    table(id="chessboard")
+      thead
+        tr
+          td(colspan="8") Player 1
+      tfoot
+        tr
+          td(colspan="8") Player 2
+      tbody
+        +row()
+        +row()
+        +row()
+        +row()
+        +row()
+        +row()
+        +row()
+        +row()
