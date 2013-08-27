@@ -21,7 +21,7 @@ var cell_add = function (cell, up, right) {
   y = cell[1] + up;
 
   // Check that the cell is legal.
-  if (x > 8  || x < 1 || y > 8 || y < 1) {
+  if (!cartesian_legal([x, y])) {
     return false;
   }
 
@@ -48,4 +48,12 @@ var alphabet_char = function (index) {
 // Returns the index of a given character in the alphabet.
 var alphabet_index = function (char) {
   return 'ABCDEFGH'.indexOf(char);
+};
+
+/**
+ * Determines if a given cartesian coordinate lies within the board.
+ */
+
+var cartesian_legal = function (coords) {
+  return coords[0] >= 0 && coords[0] < 8 && coords[1] >= 0 && coords[1] < 8;
 };
