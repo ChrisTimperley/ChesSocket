@@ -75,38 +75,11 @@ var calculate_moves = {
    */
 
   'rook': function (board, piece) {
-
-    cell = cartesian_form(piece.cell);
-    colour = piece.colour;
-    moves = [];
-
-    // Move upwards and downwards as far as possible.
-    // Stop at any occupied cells, including them only if they are enemies.
-    [1, -1].forEach(function(direction){
-      for (var y = cell[1] + direction; (y >= 0 && y < 8); y += direction) {
-        dest = [cell[0], y];
-        if (!cell_occupied_friendly(board, dest, colour))) {
-          moves.append(dest);
-        }
-        if (cell_occupied(board, dest, colour)) {
-          break;
-        }
-      }
-    });
-
-    // Move left and right as far as possible.
-    [1, -1].forEach(function(direction){
-      for (var x = cell[1] + direction; (x >= 0 && x < 8); x += direction) {
-        dest = [x, cell[1]];
-        if (!cell_occupied_friendly(board, dest, colour))) {
-          moves.append(dest);
-        }
-        if (cell_occupied(board, dest, colour)) {
-          break;
-        }
-      }
-    });
-
+    return [
+      [1, 0], [-1, 0], [0, -1], [0, 1]
+    ].reduce(function(moves, direction){
+      return moves.append(calculate_move_vector(board, piece, direction));
+    }, []);
   },
 
   /**
