@@ -57,18 +57,28 @@ function board_load(pieces) {
 
 function board_move(board, piece, to) {
 
+  board = board_copy(board);
+
   from_coords = cartesian_form(piece.cell);
   to_coords = cartesian_form(to);
 
   board[from_coords[0]][from_coords[1]] = null;
   board[to_coords[0]][to_coords[1]] = new Piece(piece.colour, piece.type, to);
 
-  // Pointers to pieces that exist on other boards are still here.
-  // But they shouldn't cause a problem, since any mutations create a new object.
-
   return board;
 
 };
+
+/**
+ * Creates a shallow copy of a given board.
+ */
+
+function board_copy(board)
+{
+  return board.slice(0).map(function(column){
+    return column.slice(0);
+  });
+}
 
 /**
  * Renders the board to the console (for debugging purposes).
