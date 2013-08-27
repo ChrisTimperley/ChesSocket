@@ -38,4 +38,5 @@ var all_moves_piece = function (game, piece)
   * Special cases:
   * - Castling.
   * - Promotion.
+  * - En passant.
   */

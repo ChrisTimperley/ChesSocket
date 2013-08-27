@@ -7,11 +7,10 @@
 
 var calculate_moves = {
 
-
   /**
    * The knight can move at most in only one of 8 pre-calculated directions.
    * Exclude those destinations which are either outside the board
-   * or which are occupied.
+   * or which are occupied by a friendly piece.
    */
 
   'knight': function (piece) {
@@ -23,7 +22,7 @@ var calculate_moves = {
     ].map(function(offset){
       return [offset[0] + cell[0], offset[1] + cell[1]];
     }).filter(function(move){
-      return cartesian_legal(move);
+      return cartesian_legal(move) && !cell_occupied_friendly(board, dest, colour);
     });
   },
 
@@ -43,7 +42,7 @@ var calculate_moves = {
       [cell[0] - 1, cell[1] + direction],
       [cell[0] + 1, cell[1] + direction],
     ].filter(function(dest){
-      return cartesian_legal(dest) && cell_occupied_enemy(board, colour, dest);
+      return cartesian_legal(dest) && cell_occupied_enemy(board, dest, colour);
     });
 
     // Unless blocked, a pawn can ALWAYS move forward.
@@ -63,6 +62,10 @@ var calculate_moves = {
     }
 
     // CHECK FILTER.
+
+  },
+
+  'rook': function (piece) {
 
   },
 
