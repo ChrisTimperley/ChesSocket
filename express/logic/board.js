@@ -70,6 +70,23 @@ function board_move(board, piece, to) {
 };
 
 /**
+ * Returns the contents of a given cell on the board.
+ *
+ * Parameters:
+ * board - The current state of the board.
+ * cell - The cell to check (in algebraic notation).
+ *
+ * Return:
+ * The contents of the specified cell.
+ */
+
+function board_cell(board, cell)
+{
+  cell = cartesian_form(cell);
+  return board[cell[0]][cell[1]];
+}
+
+/**
  * Creates a shallow copy of a given board.
  */
 
@@ -124,7 +141,6 @@ function board_pieces(board) {
  */
 
 function cell_contents(board, cell) {
-  cell = cartesian_form(cell);
   return board[cell[0]][cell[1]];
 }
 
@@ -133,7 +149,7 @@ function cell_contents(board, cell) {
  */
 
 function cell_occupied(board, cell) {
-  return board.cells[cell] != null;
+  return board[cell[0]][cell[1]] != null;
 }
 
 /**
@@ -141,7 +157,7 @@ function cell_occupied(board, cell) {
  */
 
 function cell_occupied_by_enemy(board, cell, colour) {
-  return board.cells[cell] != null && board.cells[cell].colour != colour;
+  return board[cell[0]][cell[1]] != null && board[cell[0]][cell[1]].colour != colour;
 }
 
 /**
@@ -149,5 +165,5 @@ function cell_occupied_by_enemy(board, cell, colour) {
  */
 
 function cell_occupied_by_friendly(board, cell, colour) {
-  return board.cells[cell] != null && board.cells[cell].colour == colour;
+  return board[cell[0]][cell[1]] != null && board[cell[0]][cell[1]].colour == colour;
 }

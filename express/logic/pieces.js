@@ -79,15 +79,14 @@ var __calculate_moves = {
   'pawn': function (board, piece) {
 
     cell = cartesian_form(piece.cell);
-    direction = parseInt(colour == 'white');
-    colour = piece.colour;
+    direction = piece.colour == 'white' ? 1 : 0;
     
     // Check if the pawn can take a piece on each diagonal.
     moves = [
       [cell[0] - 1, cell[1] + direction],
       [cell[0] + 1, cell[1] + direction],
     ].filter(function(dest){
-      return cartesian_legal(dest) && cell_occupied_enemy(board, dest, colour);
+      return cartesian_legal(dest) && cell_occupied_by_enemy(board, dest, piece.colour);
     });
 
     // Unless blocked, a pawn can ALWAYS move forward.
@@ -95,16 +94,18 @@ var __calculate_moves = {
     // cease to be a pawn and are promoted to another piece.
     dest = [cell[0], cell[1] + direction]
     if (!cell_occupied(board, dest)) {
-      moves.append(dest);
+      moves.push(dest);
     }
 
     // Starting position.
     if ((cell[1] == 1 && direction == 1) || (cell[1] == 6 && direction == -1)) {
       dest = [cell[0], cell[1] + (direction * 2)];
       if (!cell_occupied(board, dest)) {
-        moves.append(dest);
+        moves.push(dest);
       }
     }
+
+    return moves;
 
   },
 
@@ -187,8 +188,8 @@ var __calculate_moves = {
 
 var calculate_move_vector = function (board, piece, direction) {
   moves = [];
-  for (var dest = cartesian_form(piece.cell), cartesian_legal(dest), dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
-    if (!cell_occupied_friendly(board, dest, piece.colour))) {
+  for (var dest = cartesian_form(piece.cell); cartesian_legal(dest); dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
+    if (!cell_occupied_friendly(board, dest, piece.colour)) {
       moves.append(dest);
     }
     if (cell_occupied(board, dest, piece.colour)) {
