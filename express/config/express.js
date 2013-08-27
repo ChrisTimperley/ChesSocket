@@ -8,6 +8,9 @@ var pkg = require('../package.json');
 
 module.exports = function (app, config) {
 
+  // Port.
+  app.set('port', 8124);
+
   // Setup static content.
   app.use(express.static(config.root + '/assets'));
 
@@ -24,7 +27,6 @@ module.exports = function (app, config) {
     // Expose package and environment to views.
     app.use(function (req, res, next) {
       res.locals.pkg = pkg;
-      res.locals.env = env;
       next();
     });
 
