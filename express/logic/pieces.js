@@ -2,10 +2,56 @@
  * This file contains functions for calculating the moves that each specific
  * type of piece can make.
  *
+ * TODO:
+ * - Castling.
+ * - En passant.
+ * - Promotion (belongs in game-level logic).
+ *
  * Author: Chris Timperley <christimperley@gmail.com>
  */
 
-var calculate_moves = {
+/**
+ * Calculates all the moves which a given piece can make.
+ * This function can optionally include or exclude those moves which would put
+ * the player into check.
+ *
+ * Parameters:
+ * board - The current state of the board.
+ * piece - The piece whose possible moves are being calculated.
+ * check_enforce - True if list of moves should exclude those which put the player in check.
+ *
+ * Returns:
+ * A list of all the possible moves this piece can make.
+ */
+
+function calculate_moves(board, piece, check_enforce) {
+  check_enforce = typeof check_enforce !== 'undefined' ? check_enforce : true;
+  moves = __calculate_moves[piece.type](board, piece);
+
+  // Filter the list to only those which do not result in check if
+  // enforcement is enabled.
+  if (check_enforce) {
+    moves.filter(function(move){
+      return determine_check(apply_move(board, move), player);
+    });
+  }
+
+  return moves;
+}
+
+/**
+ * This indexed set of private functions are responsible for the piece specific
+ * movement calculations.
+ *
+ * Each function has the following form:
+ * board - The current state of the board.
+ * piece - The piece whose possible moves are being calculated.
+ *
+ * And each returns a list of the possible moves for that piece (before taking
+ * into account that certain moves may put the player in check).
+ */
+
+var __calculate_moves = {
 
   /**
    * The knight can move at most in only one of 8 pre-calculated directions.

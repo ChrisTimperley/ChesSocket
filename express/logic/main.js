@@ -29,14 +29,3 @@ var all_moves_piece = function (game, piece)
 {
 
 };
-
-/**
- * NEED A CHECK FILTER
- */
-
- /**
-  * Special cases:
-  * - Castling.
-  * - Promotion.
-  * - En passant.
-  */
