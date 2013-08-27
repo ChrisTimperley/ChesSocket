@@ -94,6 +94,21 @@ var calculate_moves = {
     ].reduce(function(moves, direction){
       return moves.append(calculate_move_vector(board, piece, direction));
     }, []);
+  },
+
+  /**
+   * The Queen can move along the row, column and diagonals up until it is obstructed by
+   * another piece. If that piece belongs to the enemy, then the queen may move there
+   * to capture it.
+   */
+   
+  'queen': function (board, piece) {
+    return [
+      [1, 1], [-1, 1], [-1, -1], [1, -1],
+      [1, 0], [-1, 0], [0, -1], [0, 1]
+    ].reduce(function(moves, direction){
+      return moves.append(calculate_move_vector(board, piece, direction));
+    }, []);
   }
 
 };
@@ -115,7 +130,7 @@ var calculate_moves = {
 
 var calculate_move_vector = function (board, piece, direction) {
   moves = [];
-  for (var dest = cell, cartesian_legal(dest), dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
+  for (var dest = cartesian_form(piece.cell), cartesian_legal(dest), dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
     if (!cell_occupied_friendly(board, dest, piece.colour))) {
       moves.append(dest);
     }
