@@ -13,7 +13,7 @@ var calculate_moves = {
    * or which are occupied by a friendly piece.
    */
 
-  'knight': function (piece) {
+  'knight': function (board, piece) {
 
     cell = cartesian_form(piece.cell);
     return [
@@ -31,7 +31,7 @@ var calculate_moves = {
    * A pawn can take pieces which face it on a diagonal.
    */
 
-  'pawn': function (piece) {
+  'pawn': function (board, piece) {
 
     cell = cartesian_form(piece.cell);
     direction = parseInt(colour == 'white');
@@ -69,12 +69,12 @@ var calculate_moves = {
   },
 
   /**
-   * Rooks can move along any diagonal. They may no pass to a given cell if the path
-   * to that cell is blocked. The rook may take any enemy pieces on the edge of their
-   * diagonal reaches.
+   * Rooks can move along their current row and column. They may not pass to a given cell
+   * if the path to that cell is blocked. The rook may take any enemy pieces on the edge of
+   * their reaches.
    */
 
-  'rook': function (piece) {
+  'rook': function (board, piece) {
 
     cell = cartesian_form(piece.cell);
     colour = piece.colour;
@@ -107,11 +107,48 @@ var calculate_moves = {
       }
     });
 
-    // CHECK FILTER.
-    return moves.filter(function(){
-      true
-    });
-
   },
 
+  /**
+   * Bishops can move along any diagonal. They may not pass to a given cell
+   * if the path to that cell is blocked. The bishop may take any enemy pieces on the edge of
+   * their reaches.
+   */
+
+  'bishop': function (board, piece) {
+    return [
+      [1, 1], [-1, 1], [-1, -1], [1, -1]
+    ].reduce(function(moves, direction){
+      return moves.append(calculate_move_vector(board, piece, direction));
+    }, []);
+  }
+
+};
+
+/**
+ * Calculates all possibles moves that this piece can make along the given vector /
+ * in the given direction. Travels as far as possible along the vector until an occupied
+ * cell is reached; if that cell is occupied by the enemy then it is included (as it
+ * may be captured by the moving piece).
+ *
+ * Parameters:
+ * board - The current state of the board.
+ * piece - The piece to move along the vector.
+ * direction - The direction / vector to move the piece along.
+ *
+ * Returns:
+ * An array of the possible moves that can be made along this vector.
+ */
+
+var calculate_move_vector = function (board, piece, direction) {
+  moves = [];
+  for (var dest = cell, cartesian_legal(dest), dest = [dest[0] + dir[0], dest[1] + dir[1]]) {
+    if (!cell_occupied_friendly(board, dest, piece.colour))) {
+      moves.append(dest);
+    }
+    if (cell_occupied(board, dest, piece.colour)) {
+      break;
+    }
+  }
+  return moves;
 };
