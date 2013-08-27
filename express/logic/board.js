@@ -28,17 +28,15 @@
 
 function board_load(pieces) {
 
-  // Initialise an empty board.
   board = new Array(8);
   for (var i = 0; i < 8; i++) {
-    board[i] = new Array(8);
+    board[i] = [null, null, null, null, null, null, null, null];
   }
 
-  // Place each piece on the board.
-  for (piece in pieces) {
+  pieces.forEach(function(piece){
     coords = cartesian_form(piece.cell);
     board[coords[0]][coords[1]] = piece;
-  }
+  });
 
   return board;
 
@@ -58,10 +56,15 @@ function board_load(pieces) {
  */
 
 function board_move(board, piece, to) {
-  piece.cell = to;
-  to = cartesian_form(to);
-  board[to[0], to[1]] = piece;
+
+  from_coords = cartesian_form(piece.cell);
+  to_coords = cartesian_form(to);
+
+  board[from_coords[0]][from_coords[1]] = null;
+  board[to_coords[0]][to_coords[1]] = new Piece(piece.colour, piece.type, to);
+
   return board;
+
 };
 
 /**
